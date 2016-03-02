@@ -58,4 +58,26 @@ public class Band {
        return myBand;
      }
    }
+
+   //UPDATE
+    public void update(String newName) {
+      this.mName = newName;
+      try(Connection con = DB.sql2o.open()) {
+        String sql = "UPDATE bands SET name = :newName WHERE id = :id";
+        con.createQuery(sql)
+          .addParameter("newName", newName)
+          .addParameter("id", this.mId)
+          .executeUpdate();
+      }
+    }
+
+    //DELETE
+    public void delete() {
+      try(Connection con = DB.sql2o.open()) {
+        String sql = "DELETE FROM bands WHERE id = :id";
+        con.createQuery(sql)
+          .addParameter("id", this.mId)
+          .executeUpdate();
+      }
+    }
 }

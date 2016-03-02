@@ -35,4 +35,20 @@ public class BandTest {
     assertTrue(myBand.equals(savedBand));
   }
 
+  @Test
+    public void update_changesBandInDatabase_true() {
+      Band myBand = new Band("Frank Black");
+      myBand.save();
+      myBand.update("Pert'near Sandstone");
+      assertEquals("Pert'near Sandstone", myBand.getName());
+    }
+
+  @Test
+  public void delete_removesBandInDatabase_true() {
+    Band myBand = new Band("Justin Bieber");
+    myBand.save();
+    myBand.delete();
+    assertEquals(0, Band.all().size());
+  }
+
 }
