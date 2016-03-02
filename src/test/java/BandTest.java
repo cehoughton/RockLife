@@ -27,4 +27,12 @@ public class BandTest {
    assertTrue(Band.all().get(0).equals(myBand));
  }
 
+ @Test
+  public void find_findBandInDatabase_true() {
+    Band myBand = new Band("Frank Black");
+    myBand.save();
+    Band savedBand = Band.find(myBand.getId());
+    assertTrue(myBand.equals(savedBand));
+  }
+
 }
