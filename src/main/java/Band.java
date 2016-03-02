@@ -101,7 +101,7 @@ public class Band {
 
       ArrayList<Venue> venues = new ArrayList<Venue>();
 
-      for (Integer venueId : venuesIds) {
+      for (Integer venueId : venueIds) {
           String venueQuery = "Select * From venues WHERE id = :venueId";
           Venue venue = con.createQuery(venueQuery)
             .addParameter("venueId", venueId)

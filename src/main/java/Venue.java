@@ -18,6 +18,13 @@ public class Venue {
     return mName;
   }
 
+  public static List<Venue> all() {
+    String sql = "SELECT id AS mId, name AS mName FROM venues";
+    try(Connection con = DB.sql2o.open()) {
+      return con.createQuery(sql).executeAndFetch(Venue.class);
+    }
+  }
+
   @Override
   public boolean equals(Object otherVenue){
     if (!(otherVenue instanceof Venue)) {

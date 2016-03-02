@@ -52,14 +52,15 @@ public class BandTest {
   }
 
   @Test
-   public void getVenues_retrievesAllVenuesFromDatabase_VenuesList() {
-     Band myBand = new Band("Ween");
-     myBand.save();
-     Venue firstVenue = new Venue("First ave");
-     firstVenue.save();
-     Venue secondVenue = new Venue("LaurelThirst");
-     secondVenue.save();
-     Venue[] Venue = new Venue[] { firstVenue, secondVenue};
-     assertTrue(myBand.getVenues().containsAll(Arrays.asList(Venue)));
-   }
+ public void getVenues_retrievesAllVenuesFromDatabase_VenuesList() {
+   Venue myVenue = new Venue("GoodFoot");
+   myVenue.save();
+
+   Band myBand = new Band("JuJuba");
+   myBand.save();
+
+   myBand.addVenue(myVenue);
+   List savedVenues = myBand.getVenues();
+   assertEquals(savedVenues.size(), 1);
+ }
 }

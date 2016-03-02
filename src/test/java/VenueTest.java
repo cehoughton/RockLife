@@ -27,4 +27,16 @@ public class VenueTest {
     myVenue.save();
     assertTrue(Venue.all().get(0).equals(myVenue));
 }
+
+@Test
+ public void getBands_retrievesAllBandsFromDatabase_BandsList() {
+   Band myBand = new Band("Ween");
+   myBand.save();
+   Venue firstVenue = new Venue("First ave");
+   firstVenue.save();
+   Venue secondVenue = new Venue("LaurelThirst");
+   secondVenue.save();
+   Venue[] Venue = new Venue[] { firstVenue, secondVenue};
+   assertFalse(myBand.getVenues().containsAll(Arrays.asList(Venue)));
+ }
 }
