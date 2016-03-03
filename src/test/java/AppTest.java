@@ -57,6 +57,17 @@ public class AppTest extends FluentTest {
       assertEquals(Venue.all().size(), 2);
     }
 
+    @Test
+      public void displayAllBands() {
+        Band firstBand = new Band("The Arcs");
+        Band secondBand = new Band("Tame Impalla");
+        firstBand.save();
+        secondBand.save();
+        goTo("http://localhost:4567/bands");
+        assertThat(pageSource()).contains("Tame Impalla");
+        assertEquals(Band.all().size(), 2);
+      }
+
 
   // @Test
   // public void venueIsDisplayedTest() {
