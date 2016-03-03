@@ -40,6 +40,17 @@ public class App {
           return new ModelAndView(model, layout);
         }, new VelocityTemplateEngine());
 
+        post("/bands", (request, response) -> {
+          HashMap<String, Object> model = new HashMap<String, Object>();
+          String name = request.queryParams("name");
+          Band newBand = new Band(name);
+          newBand.save();
+          response.redirect("/bands");
+          return null;
+        });
+
+
+
 
 
         //RESTful ARCHITECTURE

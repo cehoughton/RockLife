@@ -5,6 +5,8 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.junit.ClassRule;
 import static org.assertj.core.api.Assertions.*;
 import static org.fluentlenium.core.filter.FilterConstructor.*;
+import static org.junit.Assert.*;
+
 
 public class AppTest extends FluentTest {
   public WebDriver webDriver = new HtmlUnitDriver();
@@ -43,6 +45,17 @@ public class AppTest extends FluentTest {
     submit(".btn");
     assertThat(pageSource()).contains("LaurelThirst");
   }
+
+  @Test
+    public void displayAllVenues() {
+      Venue firstVenue = new Venue("First Ave");
+      Venue secondVenue = new Venue("GoodFoot");
+      firstVenue.save();
+      secondVenue.save();
+      goTo("http://localhost:4567/venues");
+      assertThat(pageSource()).contains("GoodFoot");
+      assertEquals(Venue.all().size(), 2);
+    }
 
 
   // @Test
