@@ -2,7 +2,7 @@ import org.fluentlenium.adapter.FluentTest;
 import org.junit.*;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
-
+import org.junit.ClassRule;
 import static org.assertj.core.api.Assertions.*;
 import static org.fluentlenium.core.filter.FilterConstructor.*;
 
@@ -20,6 +20,9 @@ public class AppTest extends FluentTest {
   @ClassRule
   public static ServerRule server = new ServerRule();
 
-
-  //Tests go here
+  @Test
+    public void rootTest() {
+      goTo("http://localhost:4567/");
+      assertThat(pageSource()).contains("Rock On!");
+    }
 }
