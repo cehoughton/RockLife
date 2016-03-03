@@ -50,16 +50,16 @@ public class App {
           return null;
         });
 
-        // get("/bands/:id", (request,response) -> {
-        //   HashMap<String, Object> model = new HashMap<String, Object>();
-        //   int id = Integer.parseInt(request.params("id"));
-        //   Band band = Band.find(id);
-        //   model.put("band", band);
-        //   model.put("allVenues", Venue.all());
-        //   model.put("template", "templates/band.vtl");
-        //   return new ModelAndView(model, layout);
-        // }, new VelocityTemplateEngine());
-        //
+        get("/bands/:id", (request,response) -> {
+          HashMap<String, Object> model = new HashMap<String, Object>();
+          int id = Integer.parseInt(request.params("id"));
+          Band band = Band.find(id);
+          model.put("band", band);
+          model.put("allVenues", Venue.all());
+          model.put("template", "templates/band.vtl");
+          return new ModelAndView(model, layout);
+        }, new VelocityTemplateEngine());
+
         // get("/bands/:id/edit", (request, response) -> {
         //   HashMap<String, Object> model = new HashMap<String, Object>();
         //

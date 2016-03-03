@@ -1,7 +1,7 @@
-<h1>$band.getDescription()</h1>
+<h1>$band.getName()</h1>
 
-#if($band.getCategories())
-  <p>Here are the categories for this band:</p>
+#if($band.getVenues())
+  <p>Here are the venues that $band.getName() has played:</p>
   <ul>
     #foreach($category in $band.getCategories())
       <li>$category.getName()</li>
