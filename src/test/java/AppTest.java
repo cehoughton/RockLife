@@ -34,4 +34,23 @@ public class AppTest extends FluentTest {
     submit(".btn");
     assertThat(pageSource()).contains("LaurelThirst");
   }
+
+  @Test
+  public void bandIsAddedTest() {
+    goTo("http://localhost:4567/");
+    click("a", withText("Add or view a band"));
+    fill("#name").with("LaurelThirst");
+    submit(".btn");
+    assertThat(pageSource()).contains("LaurelThirst");
+  }
+
+
+  // @Test
+  // public void venueIsDisplayedTest() {
+  //   Venue myVenue = new Venue("Crystal Ballroom");
+  //   String venuePath = String.format("http://localhost:4567/%d", myVenue.getId());
+  //   goTo(venuePath);
+  //   assertThat(pageSource()).contains("Crystal Ballroom");
+  // }
+
 }

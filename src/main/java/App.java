@@ -32,6 +32,14 @@ public class App {
           return null;
         });
 
+        get("/bands", (request, response) -> {
+          HashMap<String, Object> model = new HashMap<String, Object>();
+          List<Band> bands = Band.all();
+          model.put("bands", bands);
+          model.put("template", "templates/bands.vtl");
+          return new ModelAndView(model, layout);
+        }, new VelocityTemplateEngine());
+
 
 
         //RESTful ARCHITECTURE
