@@ -47,6 +47,15 @@ public class AppTest extends FluentTest {
   }
 
   @Test
+  public void bandIsDeletedTest() {
+    Band band = new Band("The Band");
+    band.save();
+    goTo("http://localhost:4567/bands/" + band.getId());
+    submit(".deletebtn");
+    assertEquals(0, Band.all().size());
+  }
+
+  @Test
     public void displayAllVenues() {
       Venue firstVenue = new Venue("First Ave");
       Venue secondVenue = new Venue("GoodFoot");

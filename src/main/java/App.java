@@ -49,6 +49,22 @@ public class App {
           return null;
         });
 
+        get("/bands/:id", (request, response) -> {
+          HashMap<String, Object> model = new HashMap<String, Object>();
+          model.put("band", Band.find(Integer.parseInt(request.params("id"))));
+          model.put("venue", Venue.all());
+          model.put("template", "templates/band.vtl");
+          return new ModelAndView(model, layout);
+        }, new VelocityTemplateEngine());
+
+        post("/bands/deleteband", (request, response) -> {
+          Band band = Band.find(Integer.parseInt(request.queryParams("band-id")));
+          band.delete();
+          response.redirect("/bands");
+          return null;
+        });
+
+
         get("/venue/:id", (request, response) -> {
           HashMap<String, Object> model = new HashMap<String, Object>();
           model.put("venue", Venue.find(Integer.parseInt(request.params(":id"))));
@@ -57,12 +73,23 @@ public class App {
           return new ModelAndView(model, layout);
         }, new VelocityTemplateEngine());
 
-        post("/venue/:id/add-band", (request, response) -> {
-           Venue venue = Venue.find(Integer.parseInt(request.queryParams("venue_id")));
-           venue.addBand(Integer.parseInt(request.queryParams("add_band")));
-           response.redirect("/venue/" + venue.getId());
-           return null;
-         });
+        // post("/venue/:id/add-band", (request, response) -> {
+        //    Venue venue = Venue.find(Integer.parseInt(request.queryParams("venue_id")));
+        //    venue.addBand(Integer.parseInt(request.queryParams("add_band")));
+        //    response.redirect("/venue/" + venue.getId());
+        //    return null;
+        //  });
+
+        // post("/add_venues", (request, response) -> {
+        //   int bandId = Integer.parseInt(request.queryParams("band_id"));
+        //   int venueId = Integer.parseInt(request.queryParams("venue_id"));
+        //   Venue venue = Venue.find(venueId);
+        //   Venue band = Venue.find(bandId);
+        //   band.addVenue(venue);
+        //   response.redirect("/bands/" + bandId);
+        //   return null;
+        // });
+
 
 
 
