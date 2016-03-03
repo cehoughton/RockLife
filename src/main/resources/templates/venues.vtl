@@ -1,0 +1,21 @@
+<h1>Venues that Rock</h1>
+<br>
+<br>
+
+#foreach ($venue in $venues)
+  <li><a href="/venues/$venue.getId()">$venue.getName()</a></li>
+#end
+
+
+<p>Add a new venue:</p>
+
+<form action="/venues" method="post">
+  <label for="name">Venue name</label>
+  <input id="name" name="name" type="text">
+
+  <button type="submit">Add venue</button>
+</form>
+
+
+
+<p><a href='/'>Home</a></p>

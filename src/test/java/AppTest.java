@@ -25,4 +25,13 @@ public class AppTest extends FluentTest {
       goTo("http://localhost:4567/");
       assertThat(pageSource()).contains("Rock On!");
     }
+
+  @Test
+  public void venueIsCreatedTest() {
+    goTo("http://localhost:4567/");
+    click("a", withText("Add or view a venue"));
+    fill("#name").with("LaurelThirst");
+    submit(".btn");
+    assertThat(pageSource()).contains("LaurelThirst");
+  }
 }

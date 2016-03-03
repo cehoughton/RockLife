@@ -1,5 +1,5 @@
 import java.util.HashMap;
-
+import java.util.List;
 import spark.ModelAndView;
 import spark.template.velocity.VelocityTemplateEngine;
 import static spark.Spark.*;
@@ -14,6 +14,24 @@ public class App {
           model.put("template", "templates/index.vtl");
           return new ModelAndView(model, layout);
         }, new VelocityTemplateEngine());
+
+        get("/venues", (request, response) -> {
+          HashMap<String, Object> model = new HashMap<String, Object>();
+          List<Venue> venues = Venue.all();
+          model.put("venues", venues);
+          model.put("template", "templates/venues.vtl");
+          return new ModelAndView(model, layout);
+        }, new VelocityTemplateEngine());
+
+        post("/venues", (request, response) -> {
+          HashMap<String, Object> model = new HashMap<String, Object>();
+          String name = request.queryParams("name");
+          Venue newVenue = new Venue(name);
+          newVenue.save();
+          response.redirect("/venues");
+          return null;
+        });
+
 
 
         //RESTful ARCHITECTURE
