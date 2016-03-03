@@ -1,0 +1,22 @@
+<h1>$band.getDescription()</h1>
+
+
+
+#if($band.getVenues())
+  <p>Here are the venues for this band:</p>
+  <ul>
+    #foreach($venue in $band.getVenues())
+      <li><a href="/venues/$venue.getId()">$venue.getName()</a></li>
+    #end
+  </ul>
+#end
+
+<h4>Edit this band:</h4>
+
+<form action="/bands/$band.getId()/change-description" method="post">
+  <label for="newdescription">New Description</label>
+  <input id="newdescription" name="newdescription" type="text">
+  <button type="submit">Change band</button>
+</form>
+
+<p><a href='/'>Home</a></p>

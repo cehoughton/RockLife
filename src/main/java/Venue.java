@@ -56,33 +56,33 @@ public class Venue {
     }
   }
 
-  public void addBand(Band band) {
+  public void addBand(int bandId) {
   try(Connection con = DB.sql2o.open()) {
     String sql = "INSERT INTO venues_played (band_id, venue_id) VALUES (:band_id, :venue_id)";
     con.createQuery(sql)
       .addParameter("venue_id", this.getId())
-      .addParameter("band_id", band.getId())
+      .addParameter("band_id", bandId)
       .executeUpdate();
     }
   }
 
-//   public ArrayList<Band> getBands() {
-//   try(Connection con = DB.sql2o.open()){
-//     String sql = "SELECT band_id FROM venues_played WHERE venue_id = :venue_id";
-//     List<Integer> bandIds = con.createQuery(sql)
-//       .addParameter("venue_id", this.getId())
-//       .executeAndFetch(Integer.class);
-//
-//     ArrayList<Band> bands = new ArrayList<Band>();
-//
-//     for (Integer bandId : bandIds) {
-//         String bandQuery = "Select * From bands WHERE id = :bandId";
-//         Band band = con.createQuery(bandQuery)
-//           .addParameter("bandId", bandId)
-//           .executeAndFetchFirst(Band.class);
-//         bands.add(band);
-//     }
-//     return bands;
-//   }
-// }
+  public ArrayList<Band> getBands() {
+  try(Connection con = DB.sql2o.open()){
+    String sql = "SELECT band_id FROM venues_played WHERE venue_id = :venue_id";
+    List<Integer> bandIds = con.createQuery(sql)
+      .addParameter("venue_id", this.getId())
+      .executeAndFetch(Integer.class);
+
+    ArrayList<Band> bands = new ArrayList<Band>();
+
+    for (Integer bandId : bandIds) {
+        String bandQuery = "Select * From bands WHERE id = :bandId";
+        Band band = con.createQuery(bandQuery)
+          .addParameter("bandId", bandId)
+          .executeAndFetchFirst(Band.class);
+        bands.add(band);
+    }
+    return bands;
+  }
+}
 }

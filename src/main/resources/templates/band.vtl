@@ -1,3 +1,32 @@
+<h1>$band.getDescription()</h1>
+
+#if($band.getCategories())
+  <p>Here are the categories for this band:</p>
+  <ul>
+    #foreach($category in $band.getCategories())
+      <li>$category.getName()</li>
+    #end
+  </ul>
+#end
+
+<h4>Add a category to this band:</h4>
+
+<form action='/bands/$band.getId()/addvenue' method='post'>
+    <input id="band_id" name="band_id" type="hidden" value="$band.getId()">
+    <label for="venue_id">Select a venue</label>
+    <select id='venue_id' name='venue_id' type='text'>
+      #foreach($venue in $allCategories)
+        <option value="$venue.getId()"> $venue.getName() </option>
+      #end
+    </select>
+    <button type='submit'>Add category</button>
+</form>
+
+<br>
+<br>
+
+
+
 <form action="/bands/deleteband" method="post">
      <div class="form-group">
        <input id="band-id" class="form-control" name="band-id" type="hidden" value="$band.getId()">
@@ -6,4 +35,6 @@
      </div>
    </form>
  </div>
-</div
+</div>
+
+<p><a href='/'>Home</a></p>
