@@ -3,23 +3,23 @@
 #if($band.getVenues())
   <p>Here are the venues that $band.getName() has played:</p>
   <ul>
-    #foreach($category in $band.getCategories())
-      <li>$category.getName()</li>
+    #foreach($venue in $band.getVenues())
+      <li>$venue.getName()</li>
     #end
   </ul>
 #end
 
-<h4>Add a category to this band:</h4>
+<h4>Add a venue to this band:</h4>
 
-<form action='/bands/$band.getId()/addvenue' method='post'>
+<form action="/bands/$band.getId()/add_venues" method='post'>
     <input id="band_id" name="band_id" type="hidden" value="$band.getId()">
     <label for="venue_id">Select a venue</label>
     <select id='venue_id' name='venue_id' type='text'>
-      #foreach($venue in $allCategories)
+      #foreach($venue in $allVenues)
         <option value="$venue.getId()"> $venue.getName() </option>
       #end
     </select>
-    <button type='submit'>Add category</button>
+    <button type='submit'>Add venue</button>
 </form>
 
 <br>

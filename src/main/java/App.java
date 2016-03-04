@@ -89,22 +89,39 @@ public class App {
 
 
 
-        // get("/bands/:id", (request, response) -> {
-        //   HashMap<String, Object> model = new HashMap<String, Object>();
-        //   Band band = Band.find(Integer.parseInt(request.params("id")));
-        //   model.put("band", band);
-        //   model.put("venue", Venue.all());
-        //   model.put("template", "templates/band.vtl");
-        //   return new ModelAndView(model, layout);
-        // }, new VelocityTemplateEngine());
+        get("/bands/:id", (request, response) -> {
+          HashMap<String, Object> model = new HashMap<String, Object>();
+          Band band = Band.find(Integer.parseInt(request.params("id")));
+          model.put("band", band);
+          model.put("venue", Venue.all());
+          model.put("template", "templates/band.vtl");
+          return new ModelAndView(model, layout);
+        }, new VelocityTemplateEngine());
 
-        post("/bands/:id/addvenue", (request, response) -> {
+        post("bands/:id/add_venues", (request, response) -> {
           Band band = Band.find(Integer.parseInt(request.params("id")));
           band.addVenue(Integer.parseInt(request.queryParams("venue_id")));
           response.redirect("/bands/" + band.getId());
           return null;
         });
 
+        // post("/add_venues", (request, response) -> {
+        //   HashMap<String, Object> model = new HashMap<String, Object>();
+        //
+        //   Venue newVenue = Venue.find(
+        //     Integer.parseInt(
+        //     request.queryParams("venue_id")));
+        //
+        //   Band thisBand = Band.find(
+        //     Integer.parseInt(
+        //     request.queryParams("band_id")));
+        //
+        //   thisBand.addVenue(newVenue);
+        //
+        //   response.redirect("/bands/" + thisBand.getId());
+        //   return null;
+        // });
+        //
 
         post("/bands/deleteband", (request, response) -> {
           Band band = Band.find(Integer.parseInt(request.queryParams("band-id")));

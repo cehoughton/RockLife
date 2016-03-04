@@ -77,15 +77,27 @@ public class AppTest extends FluentTest {
         assertEquals(Band.all().size(), 2);
       }
 
+      @Test
+       public void addVenueToBand() {
+         Band band = new Band("MarchFourth");
+         band.save();
+         Venue venue = new Venue("Alladin");
+         venue.save();
+         goTo("http://localhost:4567/bands/" + band.getId());
+         click("option", withText("Alladin"));
+         submit(".add-venue");
+         assertThat(pageSource()).contains("Alladin");
+       }
+
     @Test
      public void addBandToVenue() {
        Venue venue = new Venue("Alladin");
        venue.save();
        Band firstBand = new Band("MarchFourth");
        firstBand.save();
-       goTo("http://localhost:4567/venue/" + Integer.toString(venue.getId()));
+       goTo("http://localhost:4567/venues/" + venue.getId());
        click("option", withText("MarchFourth"));
-       submit(".add-brand");
+       submit(".add-band");
        assertThat(pageSource()).contains("MarchFourth");
      }
 

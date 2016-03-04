@@ -38,7 +38,7 @@ public class Venue {
 
   public void save() {
     try (Connection con = DB.sql2o.open()) {
-      String sql = "INSERT INTO venues(name) VALUES (:name)";
+      String sql = "INSERT INTO venues (name) VALUES (:name)";
       this.mId = (int) con.createQuery(sql, true)
         .addParameter("name", this.mName)
         .executeUpdate()
@@ -48,7 +48,7 @@ public class Venue {
 
   public static Venue find(int id) {
     try(Connection con = DB.sql2o.open()) {
-      String sql = "SELECT * FROM venues where id=:id";
+      String sql = "SELECT id AS mId, name AS mName FROM venues WHERE id = :id";
       Venue venue = con.createQuery(sql)
         .addParameter("id", id)
         .executeAndFetchFirst(Venue.class);
@@ -66,7 +66,7 @@ public class Venue {
     }
   }
 
-  public ArrayList<Band> getBands() {
+  public List<Band> getBands() {
   try(Connection con = DB.sql2o.open()){
     String sql = "SELECT band_id FROM venues_played WHERE venue_id = :venue_id";
     List<Integer> bandIds = con.createQuery(sql)

@@ -92,9 +92,17 @@ public class Band {
       }
     }
 
+    // public List<Venue> getAllVenues() {
+    // try (Connection con = DB.sql2o.open()) {
+    //   String sql = "SELECT stores.id AS mId, stores.name AS mName FROM carries INNER JOIN stores ON carries.store_id = stores.id WHERE carries.brand_id = :id ORDER BY stores.name";
+    //   return con.createQuery(sql)
+    //     .addParameter("id", mId)
+    //     .executeAndFetch(Store.class);
+    // }
+
     public ArrayList<Venue> getVenues() {
     try(Connection con = DB.sql2o.open()){
-      String sql = "SELECT venue_id FROM venues_played WHERE band_id = :band_id";
+      String sql = "SELECT venue_id AS mId FROM venues_played WHERE band_id = :band_id";
       List<Integer> venueIds = con.createQuery(sql)
         .addParameter("band_id", this.getId())
         .executeAndFetch(Integer.class);
