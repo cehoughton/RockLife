@@ -1,9 +1,9 @@
 <h1>$band.getName()</h1>
 
-
+<br>
 
 <h4>Add a venue to this band:</h4>
-
+<br>
 <form action="/bands/$band.getId()/add_venues" method='post'>
     <input id="band_id" name="band_id" type="hidden" value="$band.getId()">
     <label for="venue_id">Select a venue</label>
@@ -21,10 +21,11 @@
   <p>Here are the venues that $band.getName() have played:</p>
   <ul>
     #foreach($venue in $band.getVenues())
-      <li>$venue.getName()</li>
+      <li><h3>$venue.getName()</h3></li>
     #end
   </ul>
 #end
+<br>
 
 <h4>Edit this band:</h4>
 
@@ -33,6 +34,9 @@
   <input id="newName" name="newName" type="text" required="true">
   <button type="submit">Change band</button>
 </form>
+
+<br>
+<br>
 
 
 <form action="/bands/deleteband" method="post">

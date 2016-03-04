@@ -1,9 +1,11 @@
 <h1>$venue.getName()</h1>
 
-
+<br>
+<br>
+<br>
 
 <h4>Add a new band that has played this venue</h4>
-
+<br>
 <form action="/venues/$venue.getId()/add-band" method='post'>
     <input id="venue_id" name="venue_id" type="hidden" value="$venue.getId()">
     <label for="band_id">Select a band</label>
@@ -14,22 +16,21 @@
     </select>
     <button type='submit'>Add band</button>
 </form>
-
-<!-- <form action="/add/band" method="post">
-   <label for="name">Add Bands</label>
-   <input id="name" name="name" type="text" required>
-
-   <button class="btn btn-success" type="submit">Add Band</button>
- </form> -->
+<br>
+<br>
 
  #if($venue.getBands())
    <p>Here are all the bands that have played the $venue.getName():</p>
    <ul>
      #foreach($band in $venue.getBands())
-       <li>$band.getName()</li>
+       <li><h3>$band.getName()</h3></li>
      #end
    </ul>
  #end
+
+<br>
+<br>
+<br>
 
 <form action="/venues/deletevenue" method="post">
      <div class="form-group">
@@ -40,6 +41,8 @@
    </form>
  </div>
 </div>
+<br>
+<br>
+<br>
 
-
-<p><a href='/'>Home</a></p>
+<p><h4><a href='/'>Home</h4></a></p>
