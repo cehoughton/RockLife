@@ -98,13 +98,6 @@ public class Band {
       }
     }
 
-    // public List<Venue> getAllVenues() {
-    // try (Connection con = DB.sql2o.open()) {
-    //   String sql = "SELECT stores.id AS mId, stores.name AS mName FROM carries INNER JOIN stores ON carries.store_id = stores.id WHERE carries.brand_id = :id ORDER BY stores.name";
-    //   return con.createQuery(sql)
-    //     .addParameter("id", mId)
-    //     .executeAndFetch(Store.class);
-    // }
 
     public List<Venue> getVenues() {
     try(Connection con = DB.sql2o.open()){

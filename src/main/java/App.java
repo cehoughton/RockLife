@@ -60,18 +60,7 @@ public class App {
           return new ModelAndView(model, layout);
         }, new VelocityTemplateEngine());
 
-        // get("/bands/:id/edit", (request, response) -> {
-        //   HashMap<String, Object> model = new HashMap<String, Object>();
-        //
-        //   Band thisBand = Band.find(
-        //     Integer.parseInt(
-        //     request.params("id")));
-        //
-        //   model.put("band", thisBand);
-        //   model.put("allVenues", Venue.all());
-        //   model.put("template", "templates/edit-band.vtl");
-        //   return new ModelAndView(model, layout);
-        // }, new VelocityTemplateEngine());
+
 
         post("/bands/:id/update", (request, response) -> {
           HashMap<String, Object> model = new HashMap<String, Object>();
@@ -86,18 +75,6 @@ public class App {
           return null;
           });
 
-
-
-        //
-        // get("/bands/:id", (request, response) -> {
-        //   HashMap<String, Object> model = new HashMap<String, Object>();
-        //   Band band = Band.find(Integer.parseInt(request.params("id")));
-        //   model.put("band", band);
-        //   model.put("venue", Venue.all());
-        //   model.put("template", "templates/band.vtl");
-        //   return new ModelAndView(model, layout);
-        // }, new VelocityTemplateEngine());
-
         post("/bands/:id/add_venues", (request, response) -> {
           Band band = Band.find(Integer.parseInt(request.params("id")));
           band.addVenue(Integer.parseInt(request.queryParams("venue_id")));
@@ -105,44 +82,12 @@ public class App {
           return null;
         });
 
-    //     post("/bands/:id/add_venues", (request, response) -> {
-    //   int bandId = Integer.parseInt(request.queryParams("band_id"));
-    //   int venueId = Integer.parseInt(request.queryParams("venue_id"));
-    //   Venue venue = Venue.find(venueId);
-    //   Band band = Band.find(bandId);
-    //   band.addVenue(venue);
-    //   response.redirect("/bands/" + bandId);
-    //   return null;
-    // });
-
-
-        // post("/add_venues", (request, response) -> {
-        //   HashMap<String, Object> model = new HashMap<String, Object>();
-        //
-        //   Venue newVenue = Venue.find(
-        //     Integer.parseInt(
-        //     request.queryParams("venue_id")));
-        //
-        //   Band thisBand = Band.find(
-        //     Integer.parseInt(
-        //     request.queryParams("band_id")));
-        //
-        //   thisBand.addVenue(newVenue);
-        //
-        //   response.redirect("/bands/" + thisBand.getId());
-        //   return null;
-        // });
-        //
-
         post("/bands/deleteband", (request, response) -> {
           Band band = Band.find(Integer.parseInt(request.queryParams("band-id")));
           band.delete();
           response.redirect("/bands");
           return null;
         });
-
-
-
 
         get("/venues/:id", (request, response) -> {
           HashMap<String, Object> model = new HashMap<String, Object>();
@@ -168,44 +113,6 @@ public class App {
            return null;
          });
 
-
-        // post("/add_venues", (request, response) -> {
-        //   int bandId = Integer.parseInt(request.queryParams("band_id"));
-        //   int venueId = Integer.parseInt(request.queryParams("venue_id"));
-        //   Venue venue = Venue.find(venueId);
-        //   Venue band = Venue.find(bandId);
-        //   band.addVenue(venue);
-        //   response.redirect("/bands/" + bandId);
-        //   return null;
-        // });
-
-
-
-
-
-
-
-
-        //RESTful ARCHITECTURE
-        //Use POST to create something on the server
-        //Use GET to retrieve something from the server
-        //Use PUT to change or update something on the server
-        //Use DELETE to remove or delete something on the server
-        //Keep URLs intuitive
-        //Each request from client contains all info necessary for that request
-
-        //ROUTES: Home Page
-
-        // get("/", (request, response) -> {
-        //     HashMap<String, Object> model = new HashMap<String, Object>();
-
-        //     model.put("template", "templates/index.vtl");
-        //     return new ModelAndView(model, layout);
-        // }, new VelocityTemplateEngine());
-
-        //ROUTES: Identification of Resources
-
-        //ROUTES: Changing Resources
 
     }
 }
