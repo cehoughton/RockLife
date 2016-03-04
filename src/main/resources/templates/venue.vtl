@@ -1,17 +1,10 @@
 <h1>$venue.getName()</h1>
 
-#if($venue.getBands())
-  <p>Here are all the bands that have played the $venue.getName():</p>
-  <ul>
-    #foreach($band in $venue.getBands())
-      <li>$band.getName()</li>
-    #end
-  </ul>
-#end
+
 
 <h4>Add a new band that has played this venue</h4>
 
-<form action='/add-bands' method='post'>
+<form action="/venues/$venue.getId()/add-band" method='post'>
     <input id="venue_id" name="venue_id" type="hidden" value="$venue.getId()">
     <label for="band_id">Select a band</label>
     <select id='band_id' name='band_id' type='text'>
@@ -21,3 +14,32 @@
     </select>
     <button type='submit'>Add band</button>
 </form>
+
+<!-- <form action="/add/band" method="post">
+   <label for="name">Add Bands</label>
+   <input id="name" name="name" type="text" required>
+
+   <button class="btn btn-success" type="submit">Add Band</button>
+ </form> -->
+
+ #if($venue.getBands())
+   <p>Here are all the bands that have played the $venue.getName():</p>
+   <ul>
+     #foreach($band in $venue.getBands())
+       <li>$band.getName()</li>
+     #end
+   </ul>
+ #end
+
+<form action="/venues/deletevenue" method="post">
+     <div class="form-group">
+       <input id="venue-id" class="form-control" name="venue-id" type="hidden" value="$venue.getId()">
+       <label for="venue-delete-btn">Delete the $venue.getName() from the database.</label>
+       <button type="submit" class="btn btn-danger deletebtn">Delete</button>
+     </div>
+   </form>
+ </div>
+</div>
+
+
+<p><a href='/'>Home</a></p>

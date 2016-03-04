@@ -56,6 +56,16 @@ public class Venue {
     }
   }
 
+  //DELETE
+  public void delete() {
+    try(Connection con = DB.sql2o.open()) {
+      String sql = "DELETE FROM venues WHERE id = :id";
+      con.createQuery(sql)
+        .addParameter("id", this.id)
+        .executeUpdate();
+    }
+  }
+
   public void addBand(int bandId) {
   try(Connection con = DB.sql2o.open()) {
     String sql = "INSERT INTO venues_played (band_id, venue_id) VALUES (:band_id, :venue_id)";

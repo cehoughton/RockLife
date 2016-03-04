@@ -79,6 +79,12 @@ public class Band {
         con.createQuery(sql)
           .addParameter("id", this.id)
           .executeUpdate();
+
+
+      String joinDeleteQuery = "DELETE FROM venues_played WHERE band_id = :bandId";
+        con.createQuery(joinDeleteQuery)
+          .addParameter("bandId", this.getId())
+          .executeUpdate();
       }
     }
 
@@ -100,7 +106,7 @@ public class Band {
     //     .executeAndFetch(Store.class);
     // }
 
-    public ArrayList<Venue> getVenues() {
+    public List<Venue> getVenues() {
     try(Connection con = DB.sql2o.open()){
       String sql = "SELECT venue_id  FROM venues_played WHERE band_id = :band_id";
       List<Integer> venueIds = con.createQuery(sql)

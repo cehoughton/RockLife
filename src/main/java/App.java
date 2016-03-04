@@ -98,12 +98,23 @@ public class App {
         //   return new ModelAndView(model, layout);
         // }, new VelocityTemplateEngine());
 
-        post("bands/:id/add_venues", (request, response) -> {
+        post("/bands/:id/add_venues", (request, response) -> {
           Band band = Band.find(Integer.parseInt(request.params("id")));
           band.addVenue(Integer.parseInt(request.queryParams("venue_id")));
           response.redirect("/bands/" + band.getId());
           return null;
         });
+
+    //     post("/bands/:id/add_venues", (request, response) -> {
+    //   int bandId = Integer.parseInt(request.queryParams("band_id"));
+    //   int venueId = Integer.parseInt(request.queryParams("venue_id"));
+    //   Venue venue = Venue.find(venueId);
+    //   Band band = Band.find(bandId);
+    //   band.addVenue(venue);
+    //   response.redirect("/bands/" + bandId);
+    //   return null;
+    // });
+
 
         // post("/add_venues", (request, response) -> {
         //   HashMap<String, Object> model = new HashMap<String, Object>();
@@ -138,17 +149,25 @@ public class App {
           int id = Integer.parseInt(request.params("id"));
           Venue venue = Venue.find(id);
           model.put("venue", venue);
-          model.put("bands", Band.all());
+          model.put("allbands", Band.all());
           model.put("template", "templates/venue.vtl");
           return new ModelAndView(model, layout);
         }, new VelocityTemplateEngine());
 
-        post("/venue/:id/add-band", (request, response) -> {
-           Venue venue = Venue.find(Integer.parseInt(request.queryParams("id")));
-           venue.addBand(Integer.parseInt(request.queryParams("add_band")));
-           response.redirect("/venue/" + venue.getId());
+        post("/venues/:id/add-band", (request, response) -> {
+           Venue venue = Venue.find(Integer.parseInt(request.params("id")));
+           venue.addBand(Integer.parseInt(request.queryParams("band_id")));
+           response.redirect("/venues/" + venue.getId());
            return null;
          });
+
+         post("/venues/deletevenue", (request, response) -> {
+           Venue venue = Venue.find(Integer.parseInt(request.queryParams("venue-id")));
+           venue.delete();
+           response.redirect("/venues");
+           return null;
+         });
+
 
         // post("/add_venues", (request, response) -> {
         //   int bandId = Integer.parseInt(request.queryParams("band_id"));
