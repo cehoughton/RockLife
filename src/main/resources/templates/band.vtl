@@ -7,7 +7,7 @@
 <form action="/bands/$band.getId()/add_venues" method='post'>
     <input id="band_id" name="band_id" type="hidden" value="$band.getId()">
     <label for="venue_id">Select a venue</label>
-    <select id='venue_id' name='venue_id' type='text'>
+    <select id='venue_id' name='venue_id' type='text' required="true">
       #foreach($venue in $allVenues)
         <option value="$venue.getId()"> $venue.getName() </option>
       #end
@@ -25,6 +25,14 @@
     #end
   </ul>
 #end
+
+<h4>Edit this band:</h4>
+
+<form action="/bands/$band.getId()/update" method="post">
+  <label for="newName">New Name</label>
+  <input id="newName" name="newName" type="text" required="true">
+  <button type="submit">Change band</button>
+</form>
 
 
 <form action="/bands/deleteband" method="post">

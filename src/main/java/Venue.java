@@ -63,8 +63,15 @@ public class Venue {
       con.createQuery(sql)
         .addParameter("id", this.id)
         .executeUpdate();
+
+      String joinDeleteQuery = "DELETE FROM venues_played WHERE venue_id = :venueId";
+        con.createQuery(joinDeleteQuery)
+          .addParameter("venueId", this.getId())
+          .executeUpdate();
+      }
     }
-  }
+
+
 
   public void addBand(int bandId) {
   try(Connection con = DB.sql2o.open()) {

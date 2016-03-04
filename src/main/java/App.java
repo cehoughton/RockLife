@@ -73,18 +73,18 @@ public class App {
         //   return new ModelAndView(model, layout);
         // }, new VelocityTemplateEngine());
 
-        // post("/bands/:id/change-description", (request, response) -> {
-        //   HashMap<String, Object> model = new HashMap<String, Object>();
-        //
-        //   Band thisBand = Band.find(
-        //     Integer.parseInt(
-        //     request.params("id")));
-        //
-        //   thisBand.update(request.queryParams("newdescription"));
-        //
-        //   response.redirect("/bands/" + thisBand.getId());
-        //   return null;
-        //   });
+        post("/bands/:id/update", (request, response) -> {
+          HashMap<String, Object> model = new HashMap<String, Object>();
+
+          Band thisBand = Band.find(
+            Integer.parseInt(
+            request.params("id")));
+
+          thisBand.update(request.queryParams("newName"));
+
+          response.redirect("/bands/" + thisBand.getId());
+          return null;
+          });
 
 
 

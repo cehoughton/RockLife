@@ -13,9 +13,9 @@
 
 <h4>Edit this band:</h4>
 
-<form action="/bands/$band.getId()/change-description" method="post">
-  <label for="newdescription">New Description</label>
-  <input id="newdescription" name="newdescription" type="text">
+<form action="/bands/$band.getId()/update" method="post">
+  <label for="newName">New Name</label>
+  <input id="newName" name="newName" type="text">
   <button type="submit">Change band</button>
 </form>
 
