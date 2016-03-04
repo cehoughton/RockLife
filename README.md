@@ -14,8 +14,8 @@ This is a App to track bands and the venues where they've played concerts.
 * Make sure you have Gradle, Java and Postgres installed.
 * In a terminal: Open postgres
 * Open psql in a new tab
-* Run the following command in psql to create the database CREATE DATABASE hair_salon
-* Navigate to your project directory in your terminal and run the following command to        populate your database psql hair_salon < hair_salon.sql
+* Run the following command in psql to create the database CREATE DATABASE band_venues
+* Navigate to your project directory in your terminal and run the following command to        populate your database psql band_venues < band_venues.sql
 * In the top level of the cloned directory, run the following command in your terminal: gradle run
 * Open your web browser of choice to localhost:4567
 
