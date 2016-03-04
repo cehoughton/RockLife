@@ -3,23 +3,23 @@ import org.sql2o.*;
 import java.util.ArrayList;
 
 public class Venue {
-  private int mId;
-  private String mName;
+  private int id;
+  private String name;
 
   public Venue(String name) {
-    this.mName = name;
+    this.name = name;
   }
 
   public int getId() {
-    return mId;
+    return id;
   }
 
   public String getName() {
-    return mName;
+    return name;
   }
 
   public static List<Venue> all() {
-    String sql = "SELECT id AS mId, name AS mName FROM venues";
+    String sql = "SELECT id , name  FROM venues";
     try(Connection con = DB.sql2o.open()) {
       return con.createQuery(sql).executeAndFetch(Venue.class);
     }
@@ -39,8 +39,8 @@ public class Venue {
   public void save() {
     try (Connection con = DB.sql2o.open()) {
       String sql = "INSERT INTO venues (name) VALUES (:name)";
-      this.mId = (int) con.createQuery(sql, true)
-        .addParameter("name", this.mName)
+      this.id = (int) con.createQuery(sql, true)
+        .addParameter("name", this.name)
         .executeUpdate()
         .getKey();
     }
@@ -48,7 +48,7 @@ public class Venue {
 
   public static Venue find(int id) {
     try(Connection con = DB.sql2o.open()) {
-      String sql = "SELECT id AS mId, name AS mName FROM venues WHERE id = :id";
+      String sql = "SELECT id, name FROM venues WHERE id = :id";
       Venue venue = con.createQuery(sql)
         .addParameter("id", id)
         .executeAndFetchFirst(Venue.class);

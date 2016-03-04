@@ -1,13 +1,6 @@
 <h1>$band.getName()</h1>
 
-#if($band.getVenues())
-  <p>Here are the venues that $band.getName() has played:</p>
-  <ul>
-    #foreach($venue in $band.getVenues())
-      <li>$venue.getName()</li>
-    #end
-  </ul>
-#end
+
 
 <h4>Add a venue to this band:</h4>
 
@@ -24,7 +17,14 @@
 
 <br>
 <br>
-
+#if($band.getVenues())
+  <p>Here are the venues that $band.getName() has played:</p>
+  <ul>
+    #foreach($venue in $band.getVenues())
+      <li>$venue.getName()</li>
+    #end
+  </ul>
+#end
 
 
 <form action="/bands/deleteband" method="post">

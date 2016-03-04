@@ -3,21 +3,21 @@ import java.util.List;
 import java.util.ArrayList;
 
 public class Band {
-  private int mId;
-  private String mName;
+  private int id;
+  private String name;
 
 
   public Band (String name) {
-    this.mName = name;
+    this.name = name;
 
   }
 
   public int getId() {
-    return mId;
+    return id;
   }
 
   public String getName() {
-    return mName;
+    return name;
   }
 
   @Override
@@ -34,8 +34,8 @@ public class Band {
   public void save() {
     try (Connection con = DB.sql2o.open()) {
       String sql = "INSERT INTO bands (name) VALUES (:name)";
-      this.mId = (int) con.createQuery(sql, true)
-        .addParameter("name", this.mName)
+      this.id = (int) con.createQuery(sql, true)
+        .addParameter("name", this.name)
         .executeUpdate()
         .getKey();
     }
@@ -43,7 +43,7 @@ public class Band {
 
   //READ
   public static List<Band> all() {
-    String sql = "SELECT id AS mId, name AS mName FROM bands";
+    String sql = "SELECT id , name FROM bands";
     try (Connection con = DB.sql2o.open()) {
       return con.createQuery(sql).executeAndFetch(Band.class);
     }
@@ -52,7 +52,7 @@ public class Band {
   //FIND
    public static Band find(int id) {
      try (Connection con = DB.sql2o.open()) {
-       String sql = "SELECT id AS mId, name AS mName FROM bands WHERE id=:id";
+       String sql = "SELECT id , name  FROM bands WHERE id=:id";
        Band myBand = con.createQuery(sql)
          .addParameter("id", id)
          .executeAndFetchFirst(Band.class);
@@ -62,12 +62,12 @@ public class Band {
 
    //UPDATE
     public void update(String newName) {
-      this.mName = newName;
+      this.name = newName;
       try(Connection con = DB.sql2o.open()) {
         String sql = "UPDATE bands SET name = :newName WHERE id = :id";
         con.createQuery(sql)
           .addParameter("newName", newName)
-          .addParameter("id", this.mId)
+          .addParameter("id", this.id)
           .executeUpdate();
       }
     }
@@ -77,7 +77,7 @@ public class Band {
       try(Connection con = DB.sql2o.open()) {
         String sql = "DELETE FROM bands WHERE id = :id";
         con.createQuery(sql)
-          .addParameter("id", this.mId)
+          .addParameter("id", this.id)
           .executeUpdate();
       }
     }
@@ -102,7 +102,7 @@ public class Band {
 
     public ArrayList<Venue> getVenues() {
     try(Connection con = DB.sql2o.open()){
-      String sql = "SELECT venue_id AS mId FROM venues_played WHERE band_id = :band_id";
+      String sql = "SELECT venue_id  FROM venues_played WHERE band_id = :band_id";
       List<Integer> venueIds = con.createQuery(sql)
         .addParameter("band_id", this.getId())
         .executeAndFetch(Integer.class);
